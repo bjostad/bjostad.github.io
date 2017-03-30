@@ -13,7 +13,7 @@
             {id: "seriesID", alias: "SeriesID", dataType: tableau.dataTypeEnum.string},
             {id: "seriesTitle", alias: "SeriesTitle", dataType: tableau.dataTypeEnum.string},
             {id: "area", alias: "Area", dataType: tableau.dataTypeEnum.string},
-            {id: "state", alias: "State", dataType: tableau.dataTypeEnum.string},            
+            //{id: "state", alias: "State", dataType: tableau.dataTypeEnum.string},            
             {id: "year", alias: "Year", dataType: tableau.dataTypeEnum.int},
             {id: "period", alias: "Period", dataType: tableau.dataTypeEnum.string},
             {id: "month", alias: "Month", dataType: tableau.dataTypeEnum.string},
@@ -64,7 +64,7 @@
                     console.log("length: "+obj.data.length);
                     
                     //Seperate city/msa/county from state to create two fields
-                    //var createState = obj.catalog.area.split(',');
+                    //var createState = obj.catalog.area;
 
                     for (var i = 0, len = obj.data.length; i < len; i++) {
 
