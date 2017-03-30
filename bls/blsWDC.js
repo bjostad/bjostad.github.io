@@ -13,6 +13,7 @@
             {id: "seriesID", alias: "SeriesID", dataType: tableau.dataTypeEnum.string},
             {id: "seriesTitle", alias: "SeriesTitle", dataType: tableau.dataTypeEnum.string},
             {id: "area", alias: "Area", dataType: tableau.dataTypeEnum.string},
+            {id: "state", alias: "State", dataType: tableau.dataTypeEnum.string},            
             {id: "year", alias: "Year", dataType: tableau.dataTypeEnum.int},
             {id: "period", alias: "Period", dataType: tableau.dataTypeEnum.string},
             {id: "month", alias: "Month", dataType: tableau.dataTypeEnum.string},
@@ -61,18 +62,22 @@
                     console.log('object::');
                     console.log(obj);
                     console.log("length: "+obj.data.length);
-
+                    
+                    //Seperate city/msa/county from state to create two fields
+                    var createState = obj.catalog.area.split(',');
 
                     for (var i = 0, len = obj.data.length; i < len; i++) {
 
                         var calcDate = (obj.data[i].periodName + " 1, " + obj.data[i].year);
+
 
                         tableData.push({
                             "seriesID": obj.seriesID,
                             "seriesTitle": obj.catalog.series_title,                            
                             "seasonality": obj.catalog.seasonality,
                             "surveyName": obj.catalog.survey_name,
-                            "area": obj.catalog.area,
+                            "area": createState[0],
+                            "state": createState[1],
                             "year": obj.data[i].year,
                             "period": obj.data[i].period,
                             "month": obj.data[i].periodName,
