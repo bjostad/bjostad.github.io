@@ -2,6 +2,7 @@
     var myConnector = tableau.makeConnector();
     var selectedData = {
         "seriesid"  :["NoInputCollected"],
+        "catalog":true,
         "registrationkey":"NoInputCollected"
     };
     console.log(selectedData);
@@ -9,13 +10,17 @@
     myConnector.getSchema = function (schemaCallback) {
         console.log('getSchema');
         var cols = [
-            {id: "seriesID", alias: "seriesID", dataType: tableau.dataTypeEnum.string},
+            {id: "seriesID", alias: "SeriesID", dataType: tableau.dataTypeEnum.string},
+            {id: "seriesTitle", alias: "SeriesTitle", dataType: tableau.dataTypeEnum.string},
+            {id: "area", alias: "Area", dataType: tableau.dataTypeEnum.string},
             {id: "year", alias: "Year", dataType: tableau.dataTypeEnum.int},
-            {id: "period", alias: "Period", dataType: tableau.dataTypeEnum.string}, 
+            {id: "period", alias: "Period", dataType: tableau.dataTypeEnum.string},
             {id: "month", alias: "Month", dataType: tableau.dataTypeEnum.string},
-            {id: "fullDate", alias: "Full Date", dataType: tableau.dataTypeEnum.string},  
-            {id: "value", alias: "value", dataType: tableau.dataTypeEnum.int}, 
-            {id: "footnotes", alias: "footnotes", dataType: tableau.dataTypeEnum.string}            
+            {id: "fullDate", alias: "Full Date", dataType: tableau.dataTypeEnum.string},
+            {id: "seasonality", alias: "Seasonality", dataType: tableau.dataTypeEnum.string},
+            {id: "surveyName", alias: "surveyName", dataType: tableau.dataTypeEnum.string},
+            {id: "value", alias: "value", dataType: tableau.dataTypeEnum.int},
+            {id: "footnotes", alias: "footnotes", dataType: tableau.dataTypeEnum.string}
         ];
 
         var tableInfo = {
@@ -64,6 +69,10 @@
 
                         tableData.push({
                             "seriesID": obj.seriesID,
+                            "seriesTitle": obj.catalog.series_title,                            
+                            "seasonality": obj.catalog.seasonality,
+                            "surveyName": obj.catalog.survey_name,
+                            "area": obj.catalog.area,
                             "year": obj.data[i].year,
                             "period": obj.data[i].period,
                             "month": obj.data[i].periodName,
